@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-    const signup = async (email, password, fullName, role) => {
+    const signup = async (email, password, fullName, role, profileData = {}) => {
         setLoading(true)
         await new Promise(resolve => setTimeout(resolve, 800))
 
@@ -71,7 +71,8 @@ export const AuthProvider = ({ children }) => {
         const newProfile = {
             id: newUser.id,
             full_name: fullName,
-            role: role
+            role,
+            ...profileData   // 🔥 THIS IS WHERE LOCATION GOES
         }
 
         // Add to mock data (in-memory only for now, resets on reload unless we persist MOCK_USERS too, but this is fine for demo)

@@ -12,12 +12,10 @@ export const CartProvider = ({ children }) => {
         setCartItems((prevItems) => {
             const existing = prevItems.find((item) => item.id === product.id)
             if (existing) {
-                toast.info(`Increased quantity of ${product.name}`)
                 return prevItems.map((item) =>
                     item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
                 )
             }
-            toast.success(`Added ${product.name} to cart`)
             return [...prevItems, { ...product, quantity: 1 }]
         })
     }

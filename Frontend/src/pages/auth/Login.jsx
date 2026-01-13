@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import { toast } from 'react-toastify'
 import { Mail, Lock, Loader2 } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Login() {
     const navigate = useNavigate()
@@ -51,18 +52,64 @@ export default function Login() {
 
     return (
         <div className="flex bg-slate-50 min-h-[calc(100vh-64px)] overflow-hidden">
-            {/* Left Side - Image/Brand */}
-            <div className="hidden lg:flex lg:w-1/2 relative">
-                <div className="absolute inset-0 bg-blue-600 mix-blend-multiply"></div>
-                <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?q=80&w=1976&auto=format&fit=crop" className="w-full h-full object-cover" alt="Water" />
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-white px-12 text-center">
-                    <h2 className="text-4xl font-bold mb-6">Hydration, Delivered.</h2>
-                    <p className="text-lg opacity-90">Join thousands of satisfied customers who get their daily hydration needs met with Go-Neer.</p>
+            {/* --- Left Side (Visuals) --- */}
+            <div className="hidden lg:flex lg:w-[45%] relative overflow-hidden bg-slate-900">
+                <motion.div
+                initial={{ scale: 1.1, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 1.5 }}
+                className="absolute inset-0"
+                >
+                <img
+                    src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?q=80&w=1976&auto=format&fit=crop"
+                    className="w-full h-full object-cover opacity-60 mix-blend-overlay"
+                    alt="Water Background"
+                />
+                <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/90 via-indigo-900/40 to-slate-900/10" />
+                </motion.div>
+
+                <div className="relative z-10 flex flex-col justify-center p-16 text-white w-full">
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3, duration: 0.8 }}
+                >
+                    <h1 className="text-5xl font-bold mb-6 leading-tight">
+                    Empower Your <br />
+                    <span className="text-blue-400">Business Journey</span>
+                    </h1>
+                    <p className="text-lg text-slate-300 max-w-md leading-relaxed">
+                    Join Go-Neer to seamlessly connect, trade, and grow.
+                    The future of local commerce starts here.
+                    </p>
+                </motion.div>
+
+                <div className="mt-12 flex items-center gap-4">
+                    <div className="flex -space-x-3">
+                    {[1, 2, 3, 4].map((i) => (
+                        <img
+                        key={i}
+                        src={`https://i.pravatar.cc/100?img=${i + 10}`}
+                        className="w-10 h-10 rounded-full border-2 border-slate-900"
+                        alt="User"
+                        />
+                    ))}
+                    </div>
+                    <p className="text-sm font-medium text-slate-300">
+                    Trusted by 10,000+ users
+                    </p>
+                </div>
                 </div>
             </div>
 
             {/* Right Side - Form */}
-            <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
+            <div className="w-full lg:w-[55%] flex items-center justify-center p-6 sm:p-12 overflow-y-auto">
+                <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                className="w-full max-w-lg space-y-8"
+                >
                 <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg border border-slate-100">
                     <div className="text-center mb-8">
                         <h2 className="text-3xl font-bold text-slate-900">Welcome Back</h2>
@@ -125,6 +172,7 @@ export default function Login() {
                         <p>Admin: admin@test.com / password123</p>
                     </div>
                 </div>
+                </motion.div>
             </div>
         </div>
     )
